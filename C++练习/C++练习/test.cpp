@@ -63,60 +63,95 @@ typedef	void    (ChildClass::* ChildClass_FUNC3)();
 
 typedef	void(*STATIC_FUNC4)();
 
-int main(int argc, const char * argv[])
+//int main(int argc, const char * argv[])
+//{
+//	//父类成员函数指针指向父类成员函数
+//	MYClass_FUNC func1 = &MYClass::test;
+//	MYClass_FUNC1 func2 = &MYClass::sing;
+//
+//	//父类成员函数指针指向子类覆盖后的或重写后的父类成员函数(不允许)
+//	//    MYClass_FUNC func3 = &ChildClass::test;
+//	//    MYClass_FUNC1 func4 = &ChildClass::sing;
+//
+//	//子类成员函数指针指向父类和子类成员函数
+//	ChildClass_FUNC2 func5 = &MYClass::test;
+//	ChildClass_FUNC2 func6 = &ChildClass::test;
+//
+//	//子类成员函数指针指向父类和子类成员函数
+//	ChildClass_FUNC3 func7 = &MYClass::sing;
+//	ChildClass_FUNC3 func8 = &ChildClass::sing;
+//
+//	//父类成员函数指针指向父类和子类成员函数
+//	MYClass_FUNC1 func9 = &MYClass::run;
+//	MYClass_FUNC1 func10 = &ChildClass::run;
+//
+//	//静态成员函数
+//	STATIC_FUNC4 func11 = &MYClass::staticfunc;
+//
+//	MYClass Ca;
+//	ChildClass Cb;
+//	int a = 6;
+//	int b = 4;
+//	MYClass&pc = Cb;
+//	pc.sing();
+//	typedef void*(*hand)(void*);
+//	hand handle = (hand(*(int*)(&func1)));
+//	handle(NULL);
+//	std::cout << "**************************" << std::endl;
+//	//(pc.*func5)(a, b);
+//	//(pc.*func6)(a, b);
+//	std::cout << "**************************" << std::endl;
+//	(Ca.*func1)(a, b);
+//	(Cb.*func1)(a, b);
+//
+//	std::cout << "**************************" << std::endl;
+//	
+//	(Ca.*func2)();
+//	(Cb.*func2)();
+//	std::cout << "**************************" << std::endl;
+//	(Cb.*func5)(a, b);
+//	(Cb.*func6)(a, b);
+//	//func7指向基类 func8指向派生类 查看能否实现多态调用（不能，在编译期间已经确定了调用方法）
+//	std::cout << "**************************" << std::endl;
+//	(Cb.*func7)();
+//	(Cb.*func8)();
+//
+//	std::cout << "**************************" << std::endl;
+//	(Ca.*func9)();
+//	(Ca.*func10)();
+//
+//	std::cout << "**************************" << std::endl;
+//	func11();
+//
+//}
+#define ARRAY(arr) (sizeof(arr)/sizeof(arr[0]))
+#pragma pack(2)
+class A
 {
-	//父类成员函数指针指向父类成员函数
-	MYClass_FUNC func1 = &MYClass::test;
-	MYClass_FUNC1 func2 = &MYClass::sing;
-
-	//父类成员函数指针指向子类覆盖后的或重写后的父类成员函数(不允许)
-	//    MYClass_FUNC func3 = &ChildClass::test;
-	//    MYClass_FUNC1 func4 = &ChildClass::sing;
-
-	//子类成员函数指针指向父类和子类成员函数
-	ChildClass_FUNC2 func5 = &MYClass::test;
-	ChildClass_FUNC2 func6 = &ChildClass::test;
-
-	//子类成员函数指针指向父类和子类成员函数
-	ChildClass_FUNC3 func7 = &MYClass::sing;
-	ChildClass_FUNC3 func8 = &ChildClass::sing;
-
-	//父类成员函数指针指向父类和子类成员函数
-	MYClass_FUNC1 func9 = &MYClass::run;
-	MYClass_FUNC1 func10 = &ChildClass::run;
-
-	//静态成员函数
-	STATIC_FUNC4 func11 = &MYClass::staticfunc;
-
-	MYClass Ca;
-	ChildClass Cb;
-	int a = 6;
-	int b = 4;
-	MYClass&pc = Cb;
-	pc.sing();
-	std::cout << "**************************" << std::endl;
-	//(pc.*func5)(a, b);
-	//(pc.*func6)(a, b);
-	std::cout << "**************************" << std::endl;
-	(Ca.*func1)(a, b);
-	(Cb.*func1)(a, b);
-
-	std::cout << "**************************" << std::endl;
+public:
+	char d;
+	int c;
+	short b;
 	
-	(Ca.*func2)();
-	(Cb.*func2)();
-	std::cout << "**************************" << std::endl;
-	(Cb.*func5)(a, b);
-	(Cb.*func6)(a, b);
-	//func7指向基类 func8指向派生类 查看能否实现多态调用（不能，在编译期间已经确定了调用方法）
-	std::cout << "**************************" << std::endl;
-	(Cb.*func7)();
-	(Cb.*func8)();
-
-	std::cout << "**************************" << std::endl;
-	(Ca.*func9)();
-	(Ca.*func10)();
-
-	std::cout << "**************************" << std::endl;
-	func11();
+	//没有在类外定义，会出现链接时错误，相当于是一种声名一样。
+	static int a;
+};
+//const int b = 20;
+#define OFFSET(Type, value)  ((int)(&((Type*)0)->value))
+int main()
+{
+	const int a = 10;
+	const int b = 20;
+	const int*p = &b;
+	int array[a+b];
+	int *p1 = (int*)&b;
+	//cout << A::a << endl;
+	cout << b << endl;
+	*p1 = 30;
+	cout << b << endl;
+	cout << ARRAY(array) << endl;
+	cout << sizeof(A) << endl;
+	cout << OFFSET(A, c) << endl;
+	return 0;
 }
+
