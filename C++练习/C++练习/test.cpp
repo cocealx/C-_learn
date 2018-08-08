@@ -124,34 +124,94 @@ typedef	void(*STATIC_FUNC4)();
 //	func11();
 //
 //}
-#define ARRAY(arr) (sizeof(arr)/sizeof(arr[0]))
-#pragma pack(2)
-class A
+//#define ARRAY(arr) (sizeof(arr)/sizeof(arr[0]))
+//#pragma pack(2)
+//class A
+//{
+//public:
+//	char d;
+//	int c;
+//	short b;
+//	
+//	//没有在类外定义，会出现链接时错误，相当于是一种声名一样。
+//	static int a;
+//};
+////const int b = 20;
+//#define OFFSET(Type, value)  ((int)(&((Type*)0)->value))
+//int main()
+//{
+//	const int a = 10;
+//	const int b = 20;
+//	const int*p = &b;
+//	int array[a+b];
+//	int *p1 = (int*)&b;
+//	//cout << A::a << endl;
+//	cout << b << endl;
+//	*p1 = 30;
+//	cout << b << endl;
+//	cout << ARRAY(array) << endl;
+//	cout << sizeof(A) << endl;
+//	cout << OFFSET(A, c) << endl;
+//	return 0;
+//}
+
+#include<iostream>
+#include<string>
+#include<map>
+using namespace std;
+//
+//int main()
+//{
+//	string s1 = "你好,中国";
+//	string s2 = "你好,中国";
+//	string s3 = "你们";
+//	map<string, string>ret;
+//	ret.insert(make_pair(s1, s2));
+//	map<string, string>::iterator it = ret.find(s3);
+//	if (it!=ret.end())
+//		cout << it->first << endl;
+//	else
+//		cout << "not equal" << endl;
+//	return 0;
+//}
+
+
+//纯虚函数能不能是析构函数
+
+class base
 {
-public:
-	char d;
-	int c;
-	short b;
 	
-	//没有在类外定义，会出现链接时错误，相当于是一种声名一样。
-	static int a;
+public:
+	//virtual base() = 0;
+	////{
+
+	////}
+	virtual int fun() = 0;
+	virtual ~base() = 0;
 };
-//const int b = 20;
-#define OFFSET(Type, value)  ((int)(&((Type*)0)->value))
-int main()
+base::~base()
 {
-	const int a = 10;
-	const int b = 20;
-	const int*p = &b;
-	int array[a+b];
-	int *p1 = (int*)&b;
-	//cout << A::a << endl;
-	cout << b << endl;
-	*p1 = 30;
-	cout << b << endl;
-	cout << ARRAY(array) << endl;
-	cout << sizeof(A) << endl;
-	cout << OFFSET(A, c) << endl;
+	cout << "base" << endl;
+}
+int base::fun()
+{
 	return 0;
 }
+class dir :public base
+{
+public:
+	~dir()
+	{
+		cout << "dir" << endl;
+	}
+	int fun()
+	{
+		return 0;
+	}
+};
 
+int main()
+{
+//	base a;
+	dir b;
+}
