@@ -209,9 +209,69 @@ public:
 		return 0;
 	}
 };
-
+union s
+{
+	char a;
+	int b[5];
+	double c;
+};
+//int main()
+//{
+////	base a;
+//	dir b;
+//	int a[5][5];
+//	cout << sizeof(s) << endl;
+//	cout << (int*)(a + 1)-(int*)a << endl;
+//	cout << (*a + 1)-(int*)a << endl;
+//	return 0;
+//}
+#include<iostream>
+#include<string>
+using namespace std;
+void reserve(string &str, int left, int right)
+{
+	while (left<right)
+	{
+		swap(str[left], str[right]);
+		++left;
+		--right;
+	}
+}
+void  find(string&str)
+{
+	int size = str.size();
+	int i = 0;
+	int left = 0;
+	int right = -1;
+	for (; i<size; i++)
+	{
+		if (str[i] == ' ')
+		{
+			right = i - 1;
+			reserve(str, left, right);
+			while (str[i] == ' ')
+			{
+				++i;
+			}
+			left = i;
+		}
+	}
+	reserve(str, left, size - 1);
+}
+#include<stdio.h>
+#include<stdlib.h>
+#define _CRT_SECURE_NO_WARNINGS
 int main()
 {
-//	base a;
-	dir b;
+
+	char buf[1024];
+	//memset(buf, 0, sizeof(buf));
+	//scanf("%s", buf);
+	
+	gets_s(buf);
+	string str(buf);
+	cout << str << endl;
+	find(str);
+	reserve(str,0,str.size()-1);
+	cout << str << endl;
 }
