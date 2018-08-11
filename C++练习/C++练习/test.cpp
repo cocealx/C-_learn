@@ -226,52 +226,153 @@ union s
 //	return 0;
 //}
 #include<iostream>
-#include<string>
+#include<vector>
+#include<map>
 using namespace std;
-void reserve(string &str, int left, int right)
-{
-	while (left<right)
-	{
-		swap(str[left], str[right]);
-		++left;
-		--right;
-	}
-}
-void  find(string&str)
-{
-	int size = str.size();
-	int i = 0;
-	int left = 0;
-	int right = -1;
-	for (; i<size; i++)
-	{
-		if (str[i] == ' ')
-		{
-			right = i - 1;
-			reserve(str, left, right);
-			while (str[i] == ' ')
-			{
-				++i;
-			}
-			left = i;
-		}
-	}
-	reserve(str, left, size - 1);
-}
-#include<stdio.h>
-#include<stdlib.h>
-#define _CRT_SECURE_NO_WARNINGS
+//int find(vector<int>&sum, int num)
+//{
+//	int left = 0;
+//	int right = sum.size() - 1;
+//	int mid = left + (right - left) >> 1;
+//	while (left<=right)
+//	{
+//		mid = left + (right - left) >> 1;
+//		if (mid <= 1)
+//			return mid;
+//		if (sum[mid] >= num&& sum[mid - 1] < num)
+//		{
+//				return mid;
+//		}	
+//		else if (sum[mid] > num&&sum[mid - 1] > num)
+//		{
+//			right = mid - 1;
+//		}
+//		else if (sum[mid] < num&&sum[mid - 1] < num)
+//		{
+//			left = mid;
+//		}
+//		else if (sum[mid - 1] == num)
+//			return mid - 1;
+//	}
+//	return -1;
+//}
+//int main()
+//{
+//	int n;
+//	cin >> n;
+//	vector<int> sum;
+//	sum.resize(n);
+//	cin >> sum[0];
+//	for (int i = 1; i < n; ++i)
+//	{
+//		cin >> sum[i];
+//		sum[i] += sum[i - 1];
+//	}
+//	int m = 0;
+//	cin >> m;
+//	int num = 0;
+//	for (int i = 0; i < m; i++)
+//	{
+//		cin >> num;
+//		cout << find(sum, num) << endl;;
+//	}
+//	return 0;
+//}
+
+//#include<iostream>
+//#include<vector>
+//using namespace std;
+//int find(vector<int>&sum, int num)
+//{
+//	int left = 0;
+//	int right = sum.size();
+//	int mid = -1;
+//	while (left<right)
+//	{
+//		mid = left + ((right - left) >> 1);
+//		if (sum[mid] == num)
+//			return mid;
+//		else if ((mid == 0 && num<sum[mid]) || (num>sum[mid - 1] && num<sum[mid]))
+//			return mid;
+//		else if (num<sum[mid])
+//			right = mid;
+//		else
+//			left = mid + 1;
+//	}
+//	return -1;
+//}
+//int main()
+//{
+//	int n;
+//	cin >> n;
+//	vector<int> sum;
+//	sum.resize(n);
+//	cin >> sum[0];
+//	for (int i = 1; i < n; ++i)
+//	{
+//		cin >> sum[i];
+//		sum[i] += sum[i - 1];
+//	}
+//	int m = 0;
+//	cin >> m;
+//	int num = 0;
+//	for (int i = 0; i < m; i++)
+//	{
+//		cin >> num;
+//		cout << find(sum, num)+1 << endl;
+//	}
+//	return 0;
+//}
+#include<queue>
 int main()
 {
-
-	char buf[1024];
-	//memset(buf, 0, sizeof(buf));
-	//scanf("%s", buf);
-	
-	gets_s(buf);
-	string str(buf);
-	cout << str << endl;
-	find(str);
-	reserve(str,0,str.size()-1);
-	cout << str << endl;
+	/*priority_queue<int,greater<int>()> q1;*/
+	priority_queue<int, less<int>()> q1;
 }
+//void reserve(string &str, int left, int right)
+//{
+//	while (left<right)
+//	{
+//		swap(str[left], str[right]);
+//		++left;
+//		--right;
+//	}
+//}
+//void  find(string&str)
+//{
+//	int size = str.size();
+//	int i = 0;
+//	int left = 0;
+//	int right = -1;
+//	for (; i<size; i++)
+//	{
+//		if (str[i] == ' ')
+//		{
+//			right = i - 1;
+//			reserve(str, left, right);
+//			while (str[i] == ' ')
+//			{
+//				++i;
+//			}
+//			left = i;
+//		}
+//	}
+//	reserve(str, left, size - 1);
+//}
+//#include<stdio.h>
+//#include<stdlib.h>
+//#define _CRT_SECURE_NO_WARNINGS
+//int main()
+//{
+//
+//	char buf[1024];
+//	//memset(buf, 0, sizeof(buf));
+//	//scanf("%s", buf);
+//	
+//	gets_s(buf);
+//	string str(buf);
+//	cout << str << endl;
+//	find(str);
+//	reserve(str,0,str.size()-1);
+//	cout << str << endl;
+//}
